@@ -1,0 +1,5 @@
+model,task_type,tokens_used,cost_usd,time_sec,success_rate,quality_score,notes
+Claude-3.5-Sonnet,refactoring,15000,0.225,45,100%,9/10,Excellent context understanding
+Claude-3.5-Sonnet,api_wrapper,25000,0.375,120,100%,10/10,Perfect implementation
+GPT-4o,refactoring,12000,0.180,38,95%,8/10,Good but missed edge case
+Gemini-2.0-Flash,testing,8000,0.040,25,90%,7/10,Fast but basic tests
