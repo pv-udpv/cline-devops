@@ -1,0 +1,30 @@
+{
+  "servers": [
+    {
+      "name": "github",
+      "provider": "github-mcp-direct",
+      "use_cases": ["repo management", "PR workflows", "issue tracking"],
+      "install": "npx -y @modelcontextprotocol/server-github",
+      "config": {
+        "auth": "GITHUB_TOKEN",
+        "scopes": ["repo", "read:org"]
+      },
+      "status": "active"
+    },
+    {
+      "name": "linear",
+      "provider": "linear-mcp",
+      "use_cases": ["task management", "project tracking"],
+      "install": "npm install -g @linear/mcp-server",
+      "config": {
+        "auth": "LINEAR_API_KEY"
+      },
+      "status": "active"
+    }
+  ],
+  "recommended_for": {
+    "api_development": ["github", "linear"],
+    "data_engineering": ["clickhouse"],
+    "reverse_engineering": ["github", "browser"]
+  }
+}
