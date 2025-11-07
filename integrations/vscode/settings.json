@@ -1,0 +1,39 @@
+{
+  "cline.mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<your-token>"
+      }
+    },
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "@linear/mcp-server"],
+      "env": {
+        "LINEAR_API_KEY": "<your-api-key>"
+      }
+    }
+  },
+  "cline.contextWindow": 200000,
+  "cline.autoApproveInstructions": false,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "charliermarsh.ruff",
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit"
+    }
+  },
+  "python.analysis.typeCheckingMode": "strict",
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/.mypy_cache": true,
+    "**/.ruff_cache": true,
+    "**/*.pyc": true
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "saoudrizwan.claude-dev",
+    "charliermarsh.ruff",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "tamasfe.even-better-toml",
+    "yzhang.markdown-all-in-one",
+    "davidanson.vscode-markdownlint"
+  ]
+}

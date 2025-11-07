@@ -1,0 +1,51 @@
+name: Sync Rules to Projects
+
+on:
+  push:
+    paths:
+      - 'rules/**'
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      target_project:
+        description: 'Target project to sync'
+        required: true
+        type: choice
+        options:
+          - all
+          - dry-run
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout cline-devops
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+      
+      - name: Test sync script
+        run: |
+          python workflows/scripts/sync-rules.py \
+            --source rules/global \
+            --target dry-run \
+            --dry-run
+      
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '✅ Rules validation passed. Ready to sync to projects.'
+            })

@@ -1,0 +1,47 @@
+name: Validate Rules
+
+on:
+  pull_request:
+    paths:
+      - 'rules/**'
+      - 'prompts/**'
+  push:
+    branches:
+      - main
+    paths:
+      - 'rules/**'
+      - 'prompts/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Check Markdown files
+        uses: DavidAnson/markdownlint-cli2-action@v18
+        with:
+          globs: |
+            rules/**/*.md
+            prompts/**/*.md
+      
+      - name: Validate structure
+        run: |
+          echo "✅ Validating repository structure..."
+          
+          # Check required directories
+          for dir in rules/global rules/project-specific rules/task-specific; do
+            if [ ! -d "$dir" ]; then
+              echo "❌ Missing directory: $dir"
+              exit 1
+            fi
+          done
+          
+          # Check global rules file
+          if [ ! -f "rules/global/.copilot-instructions.md" ]; then
+            echo "❌ Missing global .copilot-instructions.md"
+            exit 1
+          fi
+          
+          echo "✅ Structure validation passed"
